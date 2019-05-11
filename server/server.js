@@ -8,6 +8,7 @@ var {Todo} = require('./modules/todo.js');
 var {User} = require('./modules/user.js');
 
 var app = express();
+const port = process.env.PORT || 3000; // Для Heroku
 
 app.use(bodyParser.json());
 
@@ -49,11 +50,8 @@ app.get('/todos/:id', (req, res) => {
 
 })
 
-
-
-app.listen(3000,() => {
-    console.log('Started at port 3000');
+app.listen(port,() => {
+    console.log(`Started at port ${port}`);
 });
-
 
 module.exports = {app};
