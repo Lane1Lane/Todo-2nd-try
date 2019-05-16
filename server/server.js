@@ -1,5 +1,6 @@
-const _ = require('lodash');
+require('./config/config');
 
+const _ = require('lodash');
 const {ObjectID} = require('mongodb');
 
 const express = require('express');
@@ -10,7 +11,7 @@ var {Todo} = require('./modules/todo.js');
 var {User} = require('./modules/user.js');
 
 var app = express();
-const port = process.env.PORT || 3000; // Для Heroku
+const port = process.env.PORT; // Для Heroku
 
 app.use(bodyParser.json());
 
