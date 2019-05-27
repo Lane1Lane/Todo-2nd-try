@@ -9,6 +9,7 @@ const bodyParser = require('body-parser');
 var {mongoose} = require('./db/mongoose.js');
 var {Todo} = require('./modules/todo.js');
 var {User} = require('./modules/user.js');
+var {authenticate} = require('./middleware/authenticate');
 
 var app = express();
 const port = process.env.PORT; // Для Heroku
@@ -103,6 +104,22 @@ app.post('/users', (req, res) => {
     }).catch((e) => {res.status(400).send(e)})
 });
 
+
+
+app.get('/users/me', authenticate, (req, res) => {
+    // var token = req.header('x-auth');
+
+    // User.findByToken(token).then((user) => {
+    //     if (!user) {
+    //         return Promise.reject();
+    //     }
+
+    //     res.send(user);
+    // }).catch((e) => {
+    //     res.status(401).send();
+    // });
+    res.send(req.user);
+});
 
 app.listen(port,() => {
     console.log(`Started at port ${port}`);
