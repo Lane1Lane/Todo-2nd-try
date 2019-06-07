@@ -6,12 +6,12 @@ const jwt = require('jsonwebtoken');
 const userOneId = new ObjectID();
 const userTwoId = new ObjectID();
 const userOneToken = jwt.sign({_id: userOneId.toHexString(), access: 'auth'}, 'abc123').toString();
+const userTwoToken = jwt.sign({_id: userTwoId.toHexString(), access: 'auth'}, 'abc123').toString();
 const users = [{
     _id: userOneId,
     email: 'aaa@gmail.com',
     password: '1234567890',
     tokens: [{
-        _id: userOneId,
         access: 'auth',
         token: userOneToken
     }]
@@ -19,17 +19,23 @@ const users = [{
 {
     _id: userTwoId,
     email: 'bbb@gmail.com',
-    password: 'qwerty'
-}]
+    password: 'qwerty',
+    tokens: [{
+      access: 'auth',
+      token: userTwoToken
+  }]
+}];
 
 const todos = [{
     _id: new ObjectID(),
-    text: 'First test todo'
+    text: 'First test todo',
+    _creator: userOneId
   }, {
     _id: new ObjectID(),
     text: 'Second test todo',
     completed: true,
-    completedAt: 333
+    completedAt: 333,
+    _creator: userTwoId
   }];
 
   const populateTodos = (done) => {
