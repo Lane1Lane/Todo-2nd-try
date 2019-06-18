@@ -5,8 +5,8 @@ const jwt = require('jsonwebtoken');
 
 const userOneId = new ObjectID();
 const userTwoId = new ObjectID();
-const userOneToken = jwt.sign({_id: userOneId.toHexString(), access: 'auth'}, 'abc123').toString();
-const userTwoToken = jwt.sign({_id: userTwoId.toHexString(), access: 'auth'}, 'abc123').toString();
+const userOneToken = jwt.sign({_id: userOneId.toHexString(), access: 'auth'}, process.env.JWT_SECRET).toString();
+const userTwoToken = jwt.sign({_id: userTwoId.toHexString(), access: 'auth'}, process.env.JWT_SECRET).toString();
 const users = [{
     _id: userOneId,
     email: 'aaa@gmail.com',
